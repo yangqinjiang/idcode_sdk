@@ -9,6 +9,11 @@
             "email": "531553280@qq.com"
         }
     ],
+    "autoload": {
+        "psr-4": {
+            "yangqinjiang\\idcode\\": "src/yangqinjiang/idcode"
+        }
+    },
     "minimum-stability": "dev",
     "require": {}
 }
