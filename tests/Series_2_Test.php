@@ -22,4 +22,20 @@ class Series_2_Test extends \PHPUnit\Framework\TestCase
         $this->assertArrayNotHasKey('hello',$json);
         $this->assertEquals('1',$json['result_code']);
     }
+
+    public function testIndustrycategoryIdParent(){
+        $json =  \yangqinjiang\idcode\IDCodeApi::industrycategory_id_parent(10205);
+        $this->assertArrayHasKey('industrycategory_list',$json);
+        $this->assertArrayNotHasKey('not_this_array',$json);
+        $this->assertArrayNotHasKey('hello',$json);
+        $this->assertEquals('1',$json['result_code']);
+    }
+
+    public function testIndustrycategoryProduct(){
+        $json =  \yangqinjiang\idcode\IDCodeApi::industrycategory_product();
+        $this->assertArrayHasKey('industrycategory_list',$json);
+        $this->assertArrayNotHasKey('not_this_array',$json);
+        $this->assertArrayNotHasKey('hello',$json);
+        $this->assertEquals('1',$json['result_code']);
+    }
 }

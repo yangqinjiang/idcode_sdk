@@ -133,5 +133,37 @@ class IDCodeApi
         $res = $client->request('GET', $url);
         return json_decode($res->getBody(),true);
     }
-    
+    //203： 获取某一级品类接口
+    public static function industrycategory_id_parent($industrycategory_id_parent)
+    {
+        $data = new \yangqinjiang\idcode\data\IDcodeDataBase();
+        //测试数据
+        $hash = $data
+            ->setTime(time()*1000)
+            ->setPath('/sp/idcode/industrycategory/parent/id')
+            ->setOne('industrycategory_id_parent',$industrycategory_id_parent)
+            ->SetHash()
+            ->GetHash();
+        $url = $data->rquest_url;
+
+        $client = new \GuzzleHttp\Client();
+        $res = $client->request('GET', $url);
+        return json_decode($res->getBody(),true);
+    }
+    //204： 获取产品所有品类接口
+    public static function industrycategory_product()
+    {
+        $data = new \yangqinjiang\idcode\data\IDcodeDataBase();
+        //测试数据
+        $hash = $data
+            ->setTime(time()*1000)
+            ->setPath('/sp/idcode/industrycategory/product')
+            ->SetHash()
+            ->GetHash();
+        $url = $data->rquest_url;
+
+        $client = new \GuzzleHttp\Client();
+        $res = $client->request('GET', $url);
+        return json_decode($res->getBody(),true);
+    }
 }
