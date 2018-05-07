@@ -99,4 +99,39 @@ class IDCodeApi
         $res = $client->request('GET', $url);
         return json_decode($res->getBody(),true);
     }
+
+    //201： 获取人、事、物所有用途接口
+    public static function codeuse()
+    {
+        $data = new \yangqinjiang\idcode\data\IDcodeDataBase();
+        //测试数据
+        $hash = $data
+            ->setTime(time()*1000)
+            ->setPath('/sp/idcode/codeuse')
+            ->SetHash()
+            ->GetHash();
+        $url = $data->rquest_url;
+
+        $client = new \GuzzleHttp\Client();
+        $res = $client->request('GET', $url);
+        return json_decode($res->getBody(),true);
+    }
+
+    //202： 获取所有品类接口
+    public static function industrycategory()
+    {
+        $data = new \yangqinjiang\idcode\data\IDcodeDataBase();
+        //测试数据
+        $hash = $data
+            ->setTime(time()*1000)
+            ->setPath('/sp/idcode/industrycategory')
+            ->SetHash()
+            ->GetHash();
+        $url = $data->rquest_url;
+
+        $client = new \GuzzleHttp\Client();
+        $res = $client->request('GET', $url);
+        return json_decode($res->getBody(),true);
+    }
+    
 }
