@@ -11,7 +11,7 @@
     ],
     "autoload": {
         "psr-4": {
-            "yangqinjiang\\idcode\\": "src/"
+            "yangqinjiang\\idcode\\": "src/yangqinjiang/idcode"
         }
     },
     "minimum-stability": "dev",
