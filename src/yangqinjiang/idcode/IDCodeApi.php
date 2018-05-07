@@ -17,9 +17,6 @@ class IDCodeApi
         $data = new \yangqinjiang\idcode\data\IDcodeDataBase();
         //测试数据
         $hash = $data
-            ->setUrl('http://apitest.idcode.org.cn')
-            ->setAccessToken('J7X4LuOOfURXeAAEAAAAAABSK')//系统授权key
-            ->setSysAuthCode('RORJOOfU4OJ44XUf4uuXU4JuRLeeRAX7')//系统授权码
             ->setTime(time()*1000)
             ->setPath('/sp/idcode/addresses')
             ->SetHash()
@@ -38,9 +35,6 @@ class IDCodeApi
         $data = new \yangqinjiang\idcode\data\IDcodeDataBase();
         //测试数据
         $hash = $data
-            ->setUrl('http://apitest.idcode.org.cn')
-            ->setAccessToken('J7X4LuOOfURXeAAEAAAAAABSK')//系统授权key
-            ->setSysAuthCode('RORJOOfU4OJ44XUf4uuXU4JuRLeeRAX7')//系统授权码
             ->setTime(time()*1000)
             ->setPath('/sp/idcode/addresses/parent/id')
             ->setOne('address_id_parent',$id_parent)
@@ -60,9 +54,6 @@ class IDCodeApi
         $data = new \yangqinjiang\idcode\data\IDcodeDataBase();
         //测试数据
         $hash = $data
-            ->setUrl('http://apitest.idcode.org.cn')
-            ->setAccessToken('J7X4LuOOfURXeAAEAAAAAABSK')//系统授权key
-            ->setSysAuthCode('RORJOOfU4OJ44XUf4uuXU4JuRLeeRAX7')//系统授权码
             ->setTime(time()*1000)
             ->setPath('/sp/idcode/trades')
             ->SetHash()
@@ -79,12 +70,27 @@ class IDCodeApi
         $data = new \yangqinjiang\idcode\data\IDcodeDataBase();
         //测试数据
         $hash = $data
-            ->setUrl('http://apitest.idcode.org.cn')
-            ->setAccessToken('J7X4LuOOfURXeAAEAAAAAABSK')//系统授权key
-            ->setSysAuthCode('RORJOOfU4OJ44XUf4uuXU4JuRLeeRAX7')//系统授权码
             ->setTime(time()*1000)
             ->setPath('/sp/idcode/trades/parent/id')
             ->setOne('trade_id_parent',$trade_id_parent)
+            ->SetHash()
+            ->GetHash();
+        $url = $data->rquest_url;
+
+        $client = new \GuzzleHttp\Client();
+        $res = $client->request('GET', $url);
+        return json_decode($res->getBody(),true);
+    }
+
+    //105： 获取单位性质分类接口
+    //获取单位性质分类信息，用于注册项数据来源。
+    public static function unittypes()
+    {
+        $data = new \yangqinjiang\idcode\data\IDcodeDataBase();
+        //测试数据
+        $hash = $data
+            ->setTime(time()*1000)
+            ->setPath('/sp/idcode/unittypes')
             ->SetHash()
             ->GetHash();
         $url = $data->rquest_url;

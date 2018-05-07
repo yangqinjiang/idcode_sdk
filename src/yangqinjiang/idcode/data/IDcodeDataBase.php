@@ -1,5 +1,6 @@
 <?php
 namespace yangqinjiang\idcode\data;
+use yangqinjiang\idcode\Config;
 
 /**
  * 
@@ -16,8 +17,15 @@ class IDcodeDataBase
     public $access_token = '';
     public $sys_auth_code = '';
 	protected $values = array();
-	
-	/**
+
+	public function __construct()
+    {
+        $this->setUrl(Config::$URL)
+        ->setAccessToken(Config::$KEY)//系统授权key
+        ->setSysAuthCode(Config::$SYS_AUTH_CODE);//系统授权码
+    }
+
+    /**
 	* 设置签名，详见签名生成算法
 	* @param string $value 
 	**/
