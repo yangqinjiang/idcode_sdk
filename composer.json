@@ -16,6 +16,7 @@
     },
     "minimum-stability": "dev",
     "require": {
-        "phpunit/phpunit": "^7.2@dev"
+        "phpunit/phpunit": "^7.2@dev",
+        "guzzlehttp/guzzle": "~6.0"
     }
 }
