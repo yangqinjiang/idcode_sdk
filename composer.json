@@ -1,0 +1,14 @@
+{
+    "name": "yangqinjiang/idcode_sdk",
+    "description":"中国二维码注册认证中心提供给SP的接口开发包",
+    "type":"library",
+    "license":"MIT",
+    "authors": [
+        {
+            "name": "yangqinjiang",
+            "email": "531553280@qq.com"
+        }
+    ],
+    "minimum-stability": "dev",
+    "require": {}
+}
