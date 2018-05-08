@@ -701,10 +701,57 @@ class IDCodeApi
         return json_decode($res->getBody(),true);
     }
 
-    //5011
+    //5011： 上传码接口（方式一： 上传 TXT 文件）
 
-    //5012
+    //5012：上传码接口（方式二： 参数列表传递）
+    public static function uploadCodeList($company_idcode,$category_reg_id,$code_list_str)
+    {
+        $data = new \yangqinjiang\idcode\data\IDcodeDataBase();
+        //测试数据
+        $hash = $data
+            ->setTime(time()*1000)
+            ->setPath('/sp/idcode/upload/codelist')
+            ->setOne('company_idcode',$company_idcode)
+            ->setOne('category_reg_id',$category_reg_id)//品类注册 ID(必填)
+            ->setOne('code_list_str',$code_list_str)//码号列表(“1,2,3” )
+            ->SetHash()
+            ->GetHash();
 
+        $client = new \GuzzleHttp\Client();
 
-    //5013
+        try{
+
+            $res = $client->request('GET',$data->rquest_url);
+        }catch (\Exception $e){
+            return false;
+        }
+        return json_decode($res->getBody(),true);
+    }
+
+    //5013：上传码接口（方式三： 前缀 + 起始号、 终止号）
+    public static function uploadCodePrefix($company_idcode,$category_reg_id,$prefix_str,$start_num,$end_num)
+    {
+        $data = new \yangqinjiang\idcode\data\IDcodeDataBase();
+        //测试数据
+        $hash = $data
+            ->setTime(time()*1000)
+            ->setPath('/sp/idcode/upload/codeprefix')
+            ->setOne('company_idcode',$company_idcode)
+            ->setOne('category_reg_id',$category_reg_id)//品类注册 ID(必填)
+            ->setOne('prefix_str',$prefix_str)
+            ->setOne('start_num',$start_num)
+            ->setOne('end_num',$end_num)
+            ->SetHash()
+            ->GetHash();
+
+        $client = new \GuzzleHttp\Client();
+
+        try{
+
+            $res = $client->request('GET',$data->rquest_url);
+        }catch (\Exception $e){
+            return false;
+        }
+        return json_decode($res->getBody(),true);
+    }
 }

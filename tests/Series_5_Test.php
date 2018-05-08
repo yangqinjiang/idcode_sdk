@@ -36,6 +36,30 @@ class Series_5_Test extends \PHPUnit\Framework\TestCase
         $password = '123456';
 
         $json =  \yangqinjiang\idcode\IDCodeApi::uploadCode($company_idcode,$uploadcode_id,$password);
+//        var_dump($json);
+
+        $this->assertNotEquals('1',$json['result_code']);
+    }
+    public function testuploadCodeList(){
+        //必填项
+        $company_idcode = 1;//单位主码
+        $category_reg_id = 1;//上传码批次 id (必填， 可通过接口 502 获取)
+        $code_list_str = '1,2,3';
+
+        $json =  \yangqinjiang\idcode\IDCodeApi::uploadCodeList($company_idcode,$category_reg_id,$code_list_str);
+//        var_dump($json);
+
+        $this->assertNotEquals('1',$json['result_code']);
+    }
+    public function testuploadCodePrefix(){
+        //必填项
+        $company_idcode = 1;//单位主码
+        $category_reg_id = 1;//上传码批次 id (必填， 可通过接口 502 获取)
+        $prefix_str = 'prefix';
+        $start_num =1;
+        $end_num = 100;
+
+        $json =  \yangqinjiang\idcode\IDCodeApi::uploadCodePrefix($company_idcode,$category_reg_id,$prefix_str,$start_num,$end_num);
         var_dump($json);
 
         $this->assertNotEquals('1',$json['result_code']);
