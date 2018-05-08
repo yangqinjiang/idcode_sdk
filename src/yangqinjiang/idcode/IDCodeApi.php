@@ -248,4 +248,128 @@ class IDCodeApi
         }
         return json_decode($res->getBody(),true);
     }
+
+    //304： 单位认证接口
+    public static function companyinfoVerify($company_idcode,$code_pay_type,$organization_code,$file1)
+    {
+        $data = new \yangqinjiang\idcode\data\IDcodeDataBase();
+        //测试数据
+        $hash = $data
+            ->setTime(time()*1000)
+            ->setPath('/sp/idcode/companyinfo/verify')
+            ->setOne('company_idcode',$company_idcode)
+            ->setOne('code_pay_type',$code_pay_type)
+            ->setOne('organization_code',$organization_code)
+            ->setOne('file1',$file1)
+            ->SetHash()
+            ->GetHash();
+
+        $client = new \GuzzleHttp\Client();
+
+        try{
+
+            $res = $client->request('GET',$data->rquest_url);
+        }catch (\Exception $e){
+            return false;
+        }
+        return json_decode($res->getBody(),true);
+    }
+    //305： 单位资料完善相关接口
+    public static function companyinfoModify($company_idcode,$trade_id,$organunit_address,$linkphone,$linkman)
+    {
+        $data = new \yangqinjiang\idcode\data\IDcodeDataBase();
+        //测试数据
+        $hash = $data
+            ->setTime(time()*1000)
+            ->setPath('/sp/idcode/companyinfo/modify')
+            ->setOne('company_idcode',$company_idcode)
+            ->setOne('trade_id',$trade_id)
+            ->setOne('organunit_address',$organunit_address)
+            ->setOne('linkphone',$linkphone)
+            ->setOne('linkman',$linkman)
+            ->SetHash()
+            ->GetHash();
+
+        $client = new \GuzzleHttp\Client();
+
+        try{
+
+            $res = $client->request('GET',$data->rquest_url);
+        }catch (\Exception $e){
+            return false;
+        }
+        return json_decode($res->getBody(),true);
+    }
+    //306：获取单位基本信息接口
+    //单位查询企业单位的基本信息接口
+    public static function companyinfoBase($company_idcode)
+    {
+        $data = new \yangqinjiang\idcode\data\IDcodeDataBase();
+        //测试数据
+        $hash = $data
+            ->setTime(time()*1000)
+            ->setPath('/sp/idcode/companyinfo/base')
+            ->setOne('company_idcode',$company_idcode)
+            ->SetHash()
+            ->GetHash();
+
+        $client = new \GuzzleHttp\Client();
+
+        try{
+
+            $res = $client->request('GET',$data->rquest_url);
+        }catch (\Exception $e){
+            return false;
+        }
+        return json_decode($res->getBody(),true);
+    }
+    //307： 根据单位名称获取单位基本信息接口
+    //根据单位组织名称获取单位信息， 同时用于验证单位名称是
+    //否注册已经在中国二维码注册认证中心注册。
+    public static function companyinfoSearch($company_name,$search_type)
+    {
+        $data = new \yangqinjiang\idcode\data\IDcodeDataBase();
+        //测试数据
+        $hash = $data
+            ->setTime(time()*1000)
+            ->setPath('/sp/idcode/companyinfo/search')
+            ->setOne('company_name',$company_name)
+            ->setOne('search_type',$search_type)//查询方式（0、模糊 1、精确）
+            ->SetHash()
+            ->GetHash();
+
+        $client = new \GuzzleHttp\Client();
+
+        try{
+
+            $res = $client->request('GET',$data->rquest_url);
+        }catch (\Exception $e){
+            return false;
+        }
+        return json_decode($res->getBody(),true);
+    }
+
+    //308： 获取单位状态接口
+    //根据单位主码查询该单位的状态。
+    public static function companyinfoStatus($company_idcode)
+    {
+        $data = new \yangqinjiang\idcode\data\IDcodeDataBase();
+        //测试数据
+        $hash = $data
+            ->setTime(time()*1000)
+            ->setPath('/sp/idcode/organunit/status')
+            ->setOne('company_idcode',$company_idcode)
+            ->SetHash()
+            ->GetHash();
+
+        $client = new \GuzzleHttp\Client();
+
+        try{
+
+            $res = $client->request('GET',$data->rquest_url);
+        }catch (\Exception $e){
+            return false;
+        }
+        return json_decode($res->getBody(),true);
+    }
 }

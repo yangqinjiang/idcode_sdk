@@ -37,4 +37,59 @@ class Series_3_Test extends \PHPUnit\Framework\TestCase
         $this->assertEquals('0',$json['result_code']);
     }
 
+    public function testcompanyinfoVerify()
+    {
+        $company_idcode = '';
+        $code_pay_type ='';
+        $organization_code = '';
+        $file1 = '';
+
+        $json = \yangqinjiang\idcode\IDCodeApi::companyinfoVerify($company_idcode,$code_pay_type,$organization_code,$file1);
+
+
+        $this->assertEquals('10000',$json['result_code']);
+    }
+
+    public function testcompanyinfoModify()
+    {
+        $company_idcode = '';
+        $trade_id = '';
+        $organunit_address = '';
+        $linkphone = '';
+        $linkman = '';
+
+        $json = \yangqinjiang\idcode\IDCodeApi::companyinfoModify($company_idcode,$trade_id,$organunit_address,$linkphone,$linkman);
+
+        $this->assertEquals('10000',$json['result_code']);
+    }
+    public function testcompanyinfoBase()
+    {
+        $company_idcode = '';
+        $json = \yangqinjiang\idcode\IDCodeApi::companyinfoBase($company_idcode);
+
+        //参数错误，单位主码不能为空
+
+        $this->assertEquals('10000',$json['result_code']);
+    }
+    public function testcompanyinfoSearch()
+    {
+        $company_name = '测试';
+        $search_type = 0;
+        $json = \yangqinjiang\idcode\IDCodeApi::companyinfoSearch($company_name,$search_type);
+
+
+        $this->assertArrayHasKey('organunit_list',$json);
+    }
+
+    public function testcompanyinfoStatus()
+    {
+
+         $company_idcode = 0;
+        $json = \yangqinjiang\idcode\IDCodeApi::companyinfoStatus($company_idcode);
+        var_dump($json);
+
+        //参数错误，单位主码不能为空
+
+        $this->assertEquals('10000',$json['result_code']);
+    }
 }
