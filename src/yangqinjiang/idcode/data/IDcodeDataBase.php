@@ -104,7 +104,7 @@ class IDcodeDataBase
 	/**
 	 * 获取设置的值
 	 */
-	public function GetValues()
+	public function getValues()
 	{
 		return $this->values;
 	}
@@ -148,6 +148,13 @@ class IDcodeDataBase
         return $this;
     }
 
+    /**
+     * @return string
+     */
+    public function getPath()
+    {
+        return $this->path;
+    }
     public function setTime($time)
     {
         $this->values['time'] = $time;
@@ -157,6 +164,13 @@ class IDcodeDataBase
     public function setOne($key,$value)
     {
         $this->values[$key] = $value;
+        return $this;
+    }
+    public function setMore($array)
+    {
+        foreach ($array as $key=>$value){
+            $this->values[$key] = $value;
+        }
         return $this;
     }
 }

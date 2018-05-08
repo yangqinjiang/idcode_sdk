@@ -166,4 +166,86 @@ class IDCodeApi
         $res = $client->request('GET', $url);
         return json_decode($res->getBody(),true);
     }
+
+    //301： 单位注册信息提交接口 1
+    //注册信息提交到 IDcode 平台库。
+    public static function companyinfo_reg($login_name,$login_password,$organunit_name,$code,
+                                           $province_id,$city_id,$area_id,$linkphone,$sms_verify_code)
+    {
+        $data = new \yangqinjiang\idcode\data\IDcodeDataBase();
+        //测试数据
+        $hash = $data
+            ->setTime(time()*1000)
+            ->setPath('/sp/idcode/companyinfo/reg')
+            ->setOne('login_name',$login_name)
+            ->setOne('login_password',$login_password)
+            ->setOne('email','')
+            ->setOne('organunit_name',$organunit_name)
+            ->setOne('organunit_name_en','')
+            ->setOne('code',$code)
+            ->setOne('province_id',$province_id)
+            ->setOne('city_id',$city_id)
+            ->setOne('area_id',$area_id)
+            ->setOne('linkman','')
+            ->setOne('linkman_en','')
+            ->setOne('linkphone',$linkphone)
+            ->setOne('sms_verify_code',$sms_verify_code)
+            ->SetHash()
+            ->GetHash();
+
+        $client = new \GuzzleHttp\Client();
+
+        try{
+
+        $res = $client->request('GET',$data->rquest_url);
+        }catch (\Exception $e){
+            return false;
+        }
+        return json_decode($res->getBody(),true);
+    }
+
+    //302： 获取激活验证码接口(SP 平台发短信）
+    public static function verifycode($phone_code)
+    {
+        $data = new \yangqinjiang\idcode\data\IDcodeDataBase();
+        //测试数据
+        $hash = $data
+            ->setTime(time()*1000)
+            ->setPath('/sp/idcode/verifycode')
+            ->setOne('phone_code',$phone_code)
+            ->SetHash()
+            ->GetHash();
+
+        $client = new \GuzzleHttp\Client();
+
+        try{
+
+            $res = $client->request('GET',$data->rquest_url);
+        }catch (\Exception $e){
+            return false;
+        }
+        return json_decode($res->getBody(),true);
+    }
+    //303： 发送激活验证码接口(IDcode 平台发短信）
+    public static function verifycodeSend($phone_code)
+    {
+        $data = new \yangqinjiang\idcode\data\IDcodeDataBase();
+        //测试数据
+        $hash = $data
+            ->setTime(time()*1000)
+            ->setPath('/sp/idcode/verifycode/send')
+            ->setOne('phone_code',$phone_code)
+            ->SetHash()
+            ->GetHash();
+
+        $client = new \GuzzleHttp\Client();
+
+        try{
+
+            $res = $client->request('GET',$data->rquest_url);
+        }catch (\Exception $e){
+            return false;
+        }
+        return json_decode($res->getBody(),true);
+    }
 }
