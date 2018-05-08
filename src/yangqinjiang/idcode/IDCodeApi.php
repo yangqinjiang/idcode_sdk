@@ -7,164 +7,135 @@
  */
 
 namespace yangqinjiang\idcode;
+use yangqinjiang\idcode\data\IDcodeDataBase;
 
 
 class IDCodeApi
 {
-    //101:一次性返回所有级别行政信息
-    public static function addresses()
+    protected static function get($url)
     {
-        $data = new \yangqinjiang\idcode\data\IDcodeDataBase();
-        //测试数据
-        $hash = $data
-            ->setTime(time()*1000)
-            ->setPath('/sp/idcode/addresses')
-            ->SetHash()
-            ->GetHash();
-        $url = $data->rquest_url;
-
         $client = new \GuzzleHttp\Client();
 
         $res = $client->request('GET', $url);
         return json_decode($res->getBody(),true);
     }
+    //101:一次性返回所有级别行政信息
+    public static function addresses()
+    {
+        $data = new IDcodeDataBase();
+        //测试数据
+        $data
+            ->setTime(time()*1000)
+            ->setPath('/sp/idcode/addresses')
+            ->SetHash()
+            ->GetHash();
+        return self::get($data->rquest_url);
+    }
 
     //102:按照父级 ID 返回子级信息
     public static function address_id_parent($id_parent,$level)
     {
-        $data = new \yangqinjiang\idcode\data\IDcodeDataBase();
+        $data = new IDcodeDataBase();
         //测试数据
-        $hash = $data
+        $data
             ->setTime(time()*1000)
             ->setPath('/sp/idcode/addresses/parent/id')
             ->setOne('address_id_parent',$id_parent)
             ->setOne('level',$level)
             ->SetHash()
             ->GetHash();
-        $url = $data->rquest_url;
-
-        $client = new \GuzzleHttp\Client();
-        $res = $client->request('GET', $url);
-        return json_decode($res->getBody(),true);
+        return self::get($data->rquest_url);
     }
 
     //103:一次性返回所有级别行业信息
     public static function trades()
     {
-        $data = new \yangqinjiang\idcode\data\IDcodeDataBase();
+        $data = new IDcodeDataBase();
         //测试数据
-        $hash = $data
+        $data
             ->setTime(time()*1000)
             ->setPath('/sp/idcode/trades')
             ->SetHash()
             ->GetHash();
-        $url = $data->rquest_url;
-
-        $client = new \GuzzleHttp\Client();
-        $res = $client->request('GET', $url);
-        return json_decode($res->getBody(),true);
+        return self::get($data->rquest_url);
     }
     //104:一按照父级ID返回子级信息
     public static function trades_id_parent($trade_id_parent)
     {
-        $data = new \yangqinjiang\idcode\data\IDcodeDataBase();
+        $data = new IDcodeDataBase();
         //测试数据
-        $hash = $data
+        $data
             ->setTime(time()*1000)
             ->setPath('/sp/idcode/trades/parent/id')
             ->setOne('trade_id_parent',$trade_id_parent)
             ->SetHash()
             ->GetHash();
-        $url = $data->rquest_url;
-
-        $client = new \GuzzleHttp\Client();
-        $res = $client->request('GET', $url);
-        return json_decode($res->getBody(),true);
+        return self::get($data->rquest_url);
     }
 
     //105： 获取单位性质分类接口
     //获取单位性质分类信息，用于注册项数据来源。
     public static function unittypes()
     {
-        $data = new \yangqinjiang\idcode\data\IDcodeDataBase();
+        $data = new IDcodeDataBase();
         //测试数据
-        $hash = $data
+        $data
             ->setTime(time()*1000)
             ->setPath('/sp/idcode/unittypes')
             ->SetHash()
             ->GetHash();
-        $url = $data->rquest_url;
-
-        $client = new \GuzzleHttp\Client();
-        $res = $client->request('GET', $url);
-        return json_decode($res->getBody(),true);
+        return self::get($data->rquest_url);
     }
 
     //201： 获取人、事、物所有用途接口
     public static function codeuse()
     {
-        $data = new \yangqinjiang\idcode\data\IDcodeDataBase();
+        $data = new IDcodeDataBase();
         //测试数据
-        $hash = $data
+        $data
             ->setTime(time()*1000)
             ->setPath('/sp/idcode/codeuse')
             ->SetHash()
             ->GetHash();
-        $url = $data->rquest_url;
-
-        $client = new \GuzzleHttp\Client();
-        $res = $client->request('GET', $url);
-        return json_decode($res->getBody(),true);
+        return self::get($data->rquest_url);
     }
 
     //202： 获取所有品类接口
     public static function industrycategory()
     {
-        $data = new \yangqinjiang\idcode\data\IDcodeDataBase();
+        $data = new IDcodeDataBase();
         //测试数据
-        $hash = $data
+        $data
             ->setTime(time()*1000)
             ->setPath('/sp/idcode/industrycategory')
             ->SetHash()
             ->GetHash();
-        $url = $data->rquest_url;
-
-        $client = new \GuzzleHttp\Client();
-        $res = $client->request('GET', $url);
-        return json_decode($res->getBody(),true);
+        return self::get($data->rquest_url);
     }
     //203： 获取某一级品类接口
     public static function industrycategory_id_parent($industrycategory_id_parent)
     {
-        $data = new \yangqinjiang\idcode\data\IDcodeDataBase();
+        $data = new IDcodeDataBase();
         //测试数据
-        $hash = $data
+        $data
             ->setTime(time()*1000)
             ->setPath('/sp/idcode/industrycategory/parent/id')
             ->setOne('industrycategory_id_parent',$industrycategory_id_parent)
             ->SetHash()
             ->GetHash();
-        $url = $data->rquest_url;
-
-        $client = new \GuzzleHttp\Client();
-        $res = $client->request('GET', $url);
-        return json_decode($res->getBody(),true);
+        return self::get($data->rquest_url);
     }
     //204： 获取产品所有品类接口
     public static function industrycategory_product()
     {
-        $data = new \yangqinjiang\idcode\data\IDcodeDataBase();
-        //测试数据
-        $hash = $data
+        $data = new IDcodeDataBase();
+        //测试数据$hash = $data
+        $data
             ->setTime(time()*1000)
             ->setPath('/sp/idcode/industrycategory/product')
             ->SetHash()
             ->GetHash();
-        $url = $data->rquest_url;
-
-        $client = new \GuzzleHttp\Client();
-        $res = $client->request('GET', $url);
-        return json_decode($res->getBody(),true);
+        return self::get($data->rquest_url);
     }
 
     //301： 单位注册信息提交接口 1
@@ -172,9 +143,9 @@ class IDCodeApi
     public static function companyinfo_reg($login_name,$login_password,$organunit_name,$code,
                                            $province_id,$city_id,$area_id,$linkphone,$sms_verify_code)
     {
-        $data = new \yangqinjiang\idcode\data\IDcodeDataBase();
+        $data = new IDcodeDataBase();
         //测试数据
-        $hash = $data
+        $data
             ->setTime(time()*1000)
             ->setPath('/sp/idcode/companyinfo/reg')
             ->setOne('login_name',$login_name)
@@ -193,68 +164,44 @@ class IDCodeApi
             ->SetHash()
             ->GetHash();
 
-        $client = new \GuzzleHttp\Client();
-
-        try{
-
-        $res = $client->request('GET',$data->rquest_url);
-        }catch (\Exception $e){
-            return false;
-        }
-        return json_decode($res->getBody(),true);
+        return self::get($data->rquest_url);
     }
 
     //302： 获取激活验证码接口(SP 平台发短信）
     public static function verifycode($phone_code)
     {
-        $data = new \yangqinjiang\idcode\data\IDcodeDataBase();
+        $data = new IDcodeDataBase();
         //测试数据
-        $hash = $data
+        $data
             ->setTime(time()*1000)
             ->setPath('/sp/idcode/verifycode')
             ->setOne('phone_code',$phone_code)
             ->SetHash()
             ->GetHash();
 
-        $client = new \GuzzleHttp\Client();
-
-        try{
-
-            $res = $client->request('GET',$data->rquest_url);
-        }catch (\Exception $e){
-            return false;
-        }
-        return json_decode($res->getBody(),true);
+        return self::get($data->rquest_url);
     }
     //303： 发送激活验证码接口(IDcode 平台发短信）
     public static function verifycodeSend($phone_code)
     {
-        $data = new \yangqinjiang\idcode\data\IDcodeDataBase();
+        $data = new IDcodeDataBase();
         //测试数据
-        $hash = $data
+        $data
             ->setTime(time()*1000)
             ->setPath('/sp/idcode/verifycode/send')
             ->setOne('phone_code',$phone_code)
             ->SetHash()
             ->GetHash();
 
-        $client = new \GuzzleHttp\Client();
-
-        try{
-
-            $res = $client->request('GET',$data->rquest_url);
-        }catch (\Exception $e){
-            return false;
-        }
-        return json_decode($res->getBody(),true);
+        return self::get($data->rquest_url);
     }
 
     //304： 单位认证接口
     public static function companyinfoVerify($company_idcode,$code_pay_type,$organization_code,$file1)
     {
-        $data = new \yangqinjiang\idcode\data\IDcodeDataBase();
+        $data = new IDcodeDataBase();
         //测试数据
-        $hash = $data
+        $data
             ->setTime(time()*1000)
             ->setPath('/sp/idcode/companyinfo/verify')
             ->setOne('company_idcode',$company_idcode)
@@ -264,22 +211,14 @@ class IDCodeApi
             ->SetHash()
             ->GetHash();
 
-        $client = new \GuzzleHttp\Client();
-
-        try{
-
-            $res = $client->request('GET',$data->rquest_url);
-        }catch (\Exception $e){
-            return false;
-        }
-        return json_decode($res->getBody(),true);
+        return self::get($data->rquest_url);
     }
     //305： 单位资料完善相关接口
     public static function companyinfoModify($company_idcode,$trade_id,$organunit_address,$linkphone,$linkman)
     {
-        $data = new \yangqinjiang\idcode\data\IDcodeDataBase();
+        $data = new IDcodeDataBase();
         //测试数据
-        $hash = $data
+        $data
             ->setTime(time()*1000)
             ->setPath('/sp/idcode/companyinfo/modify')
             ->setOne('company_idcode',$company_idcode)
@@ -290,47 +229,31 @@ class IDCodeApi
             ->SetHash()
             ->GetHash();
 
-        $client = new \GuzzleHttp\Client();
-
-        try{
-
-            $res = $client->request('GET',$data->rquest_url);
-        }catch (\Exception $e){
-            return false;
-        }
-        return json_decode($res->getBody(),true);
+        return self::get($data->rquest_url);
     }
     //306：获取单位基本信息接口
     //单位查询企业单位的基本信息接口
     public static function companyinfoBase($company_idcode)
     {
-        $data = new \yangqinjiang\idcode\data\IDcodeDataBase();
+        $data = new IDcodeDataBase();
         //测试数据
-        $hash = $data
+        $data
             ->setTime(time()*1000)
             ->setPath('/sp/idcode/companyinfo/base')
             ->setOne('company_idcode',$company_idcode)
             ->SetHash()
             ->GetHash();
 
-        $client = new \GuzzleHttp\Client();
-
-        try{
-
-            $res = $client->request('GET',$data->rquest_url);
-        }catch (\Exception $e){
-            return false;
-        }
-        return json_decode($res->getBody(),true);
+        return self::get($data->rquest_url);
     }
     //307： 根据单位名称获取单位基本信息接口
     //根据单位组织名称获取单位信息， 同时用于验证单位名称是
     //否注册已经在中国二维码注册认证中心注册。
     public static function companyinfoSearch($company_name,$search_type)
     {
-        $data = new \yangqinjiang\idcode\data\IDcodeDataBase();
+        $data = new IDcodeDataBase();
         //测试数据
-        $hash = $data
+        $data
             ->setTime(time()*1000)
             ->setPath('/sp/idcode/companyinfo/search')
             ->setOne('company_name',$company_name)
@@ -338,39 +261,23 @@ class IDCodeApi
             ->SetHash()
             ->GetHash();
 
-        $client = new \GuzzleHttp\Client();
-
-        try{
-
-            $res = $client->request('GET',$data->rquest_url);
-        }catch (\Exception $e){
-            return false;
-        }
-        return json_decode($res->getBody(),true);
+        return self::get($data->rquest_url);
     }
 
     //308： 获取单位状态接口
     //根据单位主码查询该单位的状态。
     public static function companyinfoStatus($company_idcode)
     {
-        $data = new \yangqinjiang\idcode\data\IDcodeDataBase();
+        $data = new IDcodeDataBase();
         //测试数据
-        $hash = $data
+        $data
             ->setTime(time()*1000)
             ->setPath('/sp/idcode/organunit/status')
             ->setOne('company_idcode',$company_idcode)
             ->SetHash()
             ->GetHash();
 
-        $client = new \GuzzleHttp\Client();
-
-        try{
-
-            $res = $client->request('GET',$data->rquest_url);
-        }catch (\Exception $e){
-            return false;
-        }
-        return json_decode($res->getBody(),true);
+        return self::get($data->rquest_url);
     }
 
     //406注册/备案产品品类 IDcode 码接口
@@ -379,9 +286,9 @@ class IDCodeApi
                                                 $industrycategory_id,$category_code,$model_number,
                                                 $model_number_code,$code_pay_type,$gotourl,$sample_url)
     {
-        $data = new \yangqinjiang\idcode\data\IDcodeDataBase();
+        $data = new IDcodeDataBase();
         //测试数据
-        $hash = $data
+        $data
             ->setTime(time()*1000)
             ->setPath('/sp/idcode/idcodeinfo/reg/product')
             ->setOne('company_idcode',$company_idcode)
@@ -396,15 +303,7 @@ class IDCodeApi
             ->SetHash()
             ->GetHash();
 
-        $client = new \GuzzleHttp\Client();
-
-        try{
-
-            $res = $client->request('GET',$data->rquest_url);
-        }catch (\Exception $e){
-            return false;
-        }
-        return json_decode($res->getBody(),true);
+        return self::get($data->rquest_url);
     }
     
     //407注册/备案 非产品 品类 IDcode 码接口
@@ -414,9 +313,9 @@ class IDCodeApi
                                               $model_number_en,$introduction,$code_pay_type,
                                               $gotourl,$sample_url)
     {
-        $data = new \yangqinjiang\idcode\data\IDcodeDataBase();
+        $data = new IDcodeDataBase();
         //测试数据
-        $hash = $data
+        $data
             ->setTime(time()*1000)
             ->setPath('/sp/idcode/idcodeinfo/reg/other')
             ->setOne('company_idcode',$company_idcode)
@@ -432,24 +331,16 @@ class IDCodeApi
             ->SetHash()
             ->GetHash();
 
-        $client = new \GuzzleHttp\Client();
-
-        try{
-
-            $res = $client->request('GET',$data->rquest_url);
-        }catch (\Exception $e){
-            return false;
-        }
-        return json_decode($res->getBody(),true);
+        return self::get($data->rquest_url);
     }
 
     //502 按品类查询上传的二维码接口
     //根据品类获取上传的二维码，返回多条
     public static function uploadCodeRecord($company_idcode,$idcode_of_category,$model_number_code)
     {
-        $data = new \yangqinjiang\idcode\data\IDcodeDataBase();
+        $data = new IDcodeDataBase();
         //测试数据
-        $hash = $data
+        $data
             ->setTime(time()*1000)
             ->setPath('/sp/idcode/upload/coderecord')
             ->setOne('company_idcode',$company_idcode)//单位主码
@@ -458,24 +349,16 @@ class IDCodeApi
             ->SetHash()
             ->GetHash();
 
-        $client = new \GuzzleHttp\Client();
-
-        try{
-
-            $res = $client->request('GET',$data->rquest_url);
-        }catch (\Exception $e){
-            return false;
-        }
-        return json_decode($res->getBody(),true);
+        return self::get($data->rquest_url);
     }
 
     //503： 按上传批次 ID 查询上传的二维码接口
     //通过上传码批次 ID 获取 IDcode 上传码记录列表， 提供 HTTP JSON 数据返回。
     public static function uploadCodeInfo($company_idcode,$uploadcode_id)
     {
-        $data = new \yangqinjiang\idcode\data\IDcodeDataBase();
+        $data = new IDcodeDataBase();
         //测试数据
-        $hash = $data
+        $data
             ->setTime(time()*1000)
             ->setPath('/sp/idcode/upload/codeinfo')
             ->setOne('company_idcode',$company_idcode)//单位主码
@@ -483,24 +366,16 @@ class IDCodeApi
             ->SetHash()
             ->GetHash();
 
-        $client = new \GuzzleHttp\Client();
-
-        try{
-
-            $res = $client->request('GET',$data->rquest_url);
-        }catch (\Exception $e){
-            return false;
-        }
-        return json_decode($res->getBody(),true);
+        return self::get($data->rquest_url);
     }
 
     //504：获取一个 IDcode 码内容文件的下载地址
     //根据上传批次 ID 获取下载码内容地址， 提供 HTTP JSON 数据 返回
     public static function uploadCode($company_idcode,$uploadcode_id,$password)
     {
-        $data = new \yangqinjiang\idcode\data\IDcodeDataBase();
+        $data = new IDcodeDataBase();
         //测试数据
-        $hash = $data
+        $data
             ->setTime(time()*1000)
             ->setPath('/sp/idcode/upload/codeinfo')
             ->setOne('company_idcode',$company_idcode)//单位主码
@@ -509,23 +384,15 @@ class IDCodeApi
             ->SetHash()
             ->GetHash();
 
-        $client = new \GuzzleHttp\Client();
-
-        try{
-
-            $res = $client->request('GET',$data->rquest_url);
-        }catch (\Exception $e){
-            return false;
-        }
-        return json_decode($res->getBody(),true);
+        return self::get($data->rquest_url);
     }
     //601:单位登录验证接口
     //提供用 IDcode 注册用户登录验证。
     public static function loginverify($login_name,$login_pswd)
     {
-        $data = new \yangqinjiang\idcode\data\IDcodeDataBase();
+        $data = new IDcodeDataBase();
         //测试数据
-        $hash = $data
+        $data
             ->setTime(time()*1000)
             ->setPath('/sp/idcode/loginverify')
             ->setOne('login_name',$login_name)
@@ -533,24 +400,16 @@ class IDCodeApi
             ->SetHash()
             ->GetHash();
 
-        $client = new \GuzzleHttp\Client();
-
-        try{
-
-            $res = $client->request('GET',$data->rquest_url);
-        }catch (\Exception $e){
-            return false;
-        }
-        return json_decode($res->getBody(),true);
+        return self::get($data->rquest_url);
     }
 
 
     //602： 修改解析地址
     public static function categoryGotourl($company_idcode,$gotourl,$sample_url,$reg_id)
     {
-        $data = new \yangqinjiang\idcode\data\IDcodeDataBase();
+        $data = new IDcodeDataBase();
         //测试数据
-        $hash = $data
+        $data
             ->setTime(time()*1000)
             ->setPath('/sp/idcode/category/gotourl')
             ->setOne('company_idcode',$company_idcode)
@@ -560,23 +419,15 @@ class IDCodeApi
             ->SetHash()
             ->GetHash();
 
-        $client = new \GuzzleHttp\Client();
-
-        try{
-
-            $res = $client->request('GET',$data->rquest_url);
-        }catch (\Exception $e){
-            return false;
-        }
-        return json_decode($res->getBody(),true);
+        return self::get($data->rquest_url);
     }
 
     //603 生成码图接口
     public static function codepic($code,$pic_size,$code_type)
     {
-        $data = new \yangqinjiang\idcode\data\IDcodeDataBase();
+        $data = new IDcodeDataBase();
         //测试数据
-        $hash = $data
+        $data
             ->setTime(time()*1000)
             ->setPath('/sp/idcode/codepic')
             ->setOne('code',$code)
@@ -585,22 +436,14 @@ class IDCodeApi
             ->SetHash()
             ->GetHash();
 
-        $client = new \GuzzleHttp\Client();
-
-        try{
-
-            $res = $client->request('GET',$data->rquest_url);
-        }catch (\Exception $e){
-            return false;
-        }
-        return json_decode($res->getBody(),true);
+        return self::get($data->rquest_url);
     }
     //604 生成带边框的码图
     public static function codepicWithMargin($code,$is_margin,$unit_icon,$qrcode_size,$color)
     {
-        $data = new \yangqinjiang\idcode\data\IDcodeDataBase();
+        $data = new IDcodeDataBase();
         //测试数据
-        $hash = $data
+        $data
             ->setTime(time()*1000)
             ->setPath('/sp/idcode/codepic/withmargin')
             ->setOne('code',$code)//码内容（必填）
@@ -611,23 +454,15 @@ class IDCodeApi
             ->SetHash()
             ->GetHash();
 
-        $client = new \GuzzleHttp\Client();
-
-        try{
-
-            $res = $client->request('GET',$data->rquest_url);
-        }catch (\Exception $e){
-            return false;
-        }
-        return json_decode($res->getBody(),true);
+        return self::get($data->rquest_url);
     }
     //605 生成质量认证二维码图
     public static function codepicAuthen($company_idcode,$code,$use_logo,$unit_icon,$margin_type,$category_id,$code_type,$code_size
     ,$code_color)
     {
-        $data = new \yangqinjiang\idcode\data\IDcodeDataBase();
+        $data = new IDcodeDataBase();
         //测试数据
-        $hash = $data
+        $data
             ->setTime(time()*1000)
             ->setPath('/sp/idcode/codepic/authen')
             ->setOne('company_idcode',$company_idcode)//码内容（必填）
@@ -642,22 +477,14 @@ class IDCodeApi
             ->SetHash()
             ->GetHash();
 
-        $client = new \GuzzleHttp\Client();
-
-        try{
-
-            $res = $client->request('GET',$data->rquest_url);
-        }catch (\Exception $e){
-            return false;
-        }
-        return json_decode($res->getBody(),true);
+        return self::get($data->rquest_url);
     }
     //606： 申请 IDcode 解析地址白名单
     public static function categoryGotourlWhitelist($gotourl,$sample_url)
     {
-        $data = new \yangqinjiang\idcode\data\IDcodeDataBase();
+        $data = new IDcodeDataBase();
         //测试数据
-        $hash = $data
+        $data
             ->setTime(time()*1000)
             ->setPath('/sp/idcode/category/gotourl/whitelist')
             ->setOne('gotourl',$gotourl)
@@ -665,23 +492,15 @@ class IDCodeApi
             ->SetHash()
             ->GetHash();
 
-        $client = new \GuzzleHttp\Client();
-
-        try{
-
-            $res = $client->request('GET',$data->rquest_url);
-        }catch (\Exception $e){
-            return false;
-        }
-        return json_decode($res->getBody(),true);
+        return self::get($data->rquest_url);
     }
     //608： 查询审核状态接口
     //查询单位注册审核/解析地址审核的当前状态，提供 HTTP JSON数据返回
     public static function examinerecord($company_idcode,$category_reg_id,$type)
     {
-        $data = new \yangqinjiang\idcode\data\IDcodeDataBase();
+        $data = new IDcodeDataBase();
         //测试数据
-        $hash = $data
+        $data
             ->setTime(time()*1000)
             ->setPath('/sp/idcode/examinerecord')
             ->setOne('company_idcode',$company_idcode)
@@ -690,15 +509,7 @@ class IDCodeApi
             ->SetHash()
             ->GetHash();
 
-        $client = new \GuzzleHttp\Client();
-
-        try{
-
-            $res = $client->request('GET',$data->rquest_url);
-        }catch (\Exception $e){
-            return false;
-        }
-        return json_decode($res->getBody(),true);
+        return self::get($data->rquest_url);
     }
 
     //5011： 上传码接口（方式一： 上传 TXT 文件）
@@ -706,9 +517,9 @@ class IDCodeApi
     //5012：上传码接口（方式二： 参数列表传递）
     public static function uploadCodeList($company_idcode,$category_reg_id,$code_list_str)
     {
-        $data = new \yangqinjiang\idcode\data\IDcodeDataBase();
+        $data = new IDcodeDataBase();
         //测试数据
-        $hash = $data
+        $data
             ->setTime(time()*1000)
             ->setPath('/sp/idcode/upload/codelist')
             ->setOne('company_idcode',$company_idcode)
@@ -717,23 +528,15 @@ class IDCodeApi
             ->SetHash()
             ->GetHash();
 
-        $client = new \GuzzleHttp\Client();
-
-        try{
-
-            $res = $client->request('GET',$data->rquest_url);
-        }catch (\Exception $e){
-            return false;
-        }
-        return json_decode($res->getBody(),true);
+        return self::get($data->rquest_url);
     }
 
     //5013：上传码接口（方式三： 前缀 + 起始号、 终止号）
     public static function uploadCodePrefix($company_idcode,$category_reg_id,$prefix_str,$start_num,$end_num)
     {
-        $data = new \yangqinjiang\idcode\data\IDcodeDataBase();
+        $data = new IDcodeDataBase();
         //测试数据
-        $hash = $data
+        $data
             ->setTime(time()*1000)
             ->setPath('/sp/idcode/upload/codeprefix')
             ->setOne('company_idcode',$company_idcode)
@@ -744,14 +547,6 @@ class IDCodeApi
             ->SetHash()
             ->GetHash();
 
-        $client = new \GuzzleHttp\Client();
-
-        try{
-
-            $res = $client->request('GET',$data->rquest_url);
-        }catch (\Exception $e){
-            return false;
-        }
-        return json_decode($res->getBody(),true);
+        return self::get($data->rquest_url);
     }
 }

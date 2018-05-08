@@ -25,7 +25,7 @@ class Series_5_Test extends \PHPUnit\Framework\TestCase
         $uploadcode_id = 1;//上传码批次 id (必填， 可通过接口 502 获取)
 
         $json =  \yangqinjiang\idcode\IDCodeApi::uploadCodeInfo($company_idcode,$uploadcode_id);
-        var_dump($json);
+//        var_dump($json);
 
         $this->assertNotEquals('1',$json['result_code']);
     }
@@ -60,7 +60,7 @@ class Series_5_Test extends \PHPUnit\Framework\TestCase
         $end_num = 100;
 
         $json =  \yangqinjiang\idcode\IDCodeApi::uploadCodePrefix($company_idcode,$category_reg_id,$prefix_str,$start_num,$end_num);
-        var_dump($json);
+//        var_dump($json);
 
         $this->assertNotEquals('1',$json['result_code']);
     }

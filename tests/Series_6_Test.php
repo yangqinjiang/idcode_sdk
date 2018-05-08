@@ -78,7 +78,7 @@ class Series_6_Test extends \PHPUnit\Framework\TestCase
     {
         $gotourl = $sample_url = 'http://www.baidu.com';
         $json = \yangqinjiang\idcode\IDCodeApi::categoryGotourlWhitelist($gotourl,$sample_url);
-        var_dump($json);
+//        var_dump($json);
 
         $this->assertEquals('1',$json['result_code']);
     }

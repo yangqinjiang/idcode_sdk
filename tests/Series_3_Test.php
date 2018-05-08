@@ -86,7 +86,7 @@ class Series_3_Test extends \PHPUnit\Framework\TestCase
 
          $company_idcode = 0;
         $json = \yangqinjiang\idcode\IDCodeApi::companyinfoStatus($company_idcode);
-        var_dump($json);
+//        var_dump($json);
 
         //参数错误，单位主码不能为空
 
