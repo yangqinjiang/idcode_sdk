@@ -62,7 +62,7 @@ class IDcodeDataBase
 		$buff = "";
 		foreach ($this->values as $k => $v)
 		{
-			if($k != "hash" && $v != "" && !is_array($v)){
+			if($k != "hash" && $v !== "" && !is_array($v)){
 				$buff .= $k . "=" . $v . "&";
 			}
 		}
